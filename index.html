@@ -1,0 +1,41 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Pune biennale</title>
+<style>
+    * {
+        padding: 0;
+        margin: 0
+    }
+</style>
+
+<body>
+    <script src="pixi.js"></script>
+    <script>
+        //Test that Pixi is working
+        console.log(PIXI);
+        //Aliases
+        var Container = PIXI.Container
+            , autoDetectRenderer = PIXI.autoDetectRenderer
+            , loader = PIXI.loader
+            , resources = PIXI.loader.resources
+            , Sprite = PIXI.Sprite;
+        //Create a Pixi stage and renderer and add the 
+        //renderer.view to the DOM
+        var stage = new Container()
+            , renderer = autoDetectRenderer(1024, 768,{backgroundColor : 0xfffdd0});
+        document.body.appendChild(renderer.view);
+        //load an image and run the `setup` function when it's done
+        loader.add("blue pune biennale.png").load(setup);
+        var TextureCache = PIXI.utils.TextureCache;
+
+        function setup() {
+            //Create the `cat` sprite, add it to the stage, and render it
+            var cat = new Sprite(resources["blue pune biennale.png"].texture);
+            cat.x = 32;
+            cat.y = 32;
+            stage.addChild(cat);
+
+            renderer.render(stage);
+        }
+    </script>
+</body>
