@@ -1,30 +1,54 @@
-// Require HTTP module (to start server) and Socket.IO
-var http = require('http');
-var fs = require('fs');
-var io = require('socket.io');
-var port = 8080;
-// Start the server at port 8080
-var server = http.createServer(function (req, res) {
-    // Send HTML headers and message
-    fs.readFile('./controller.html', function (err, html) {
-        res.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
-        res.write(html)
-    });
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(8080);
+app.use(express.static('Client'))
+
+app.get('/display', function (req, res) {
+  res.sendfile('Client/display.html');
 });
-server.listen(port);
-// Create a Socket.IO instance, passing it our server
-var socket = io.listen(server);
-// Add a connect listener
-socket.on('connection', function (client) {
-    console.log('Connection to client established');
-    // Success!  Now listen to messages to be received
-    client.on('message', function (event) {
-        console.log('Received message from client!', event);
-    });
-    client.on('disconnect', function () {
-        console.log('Server has disconnected');
-    });
+
+var game_status = {};
+var player_count = 60;
+
+io.on('connection', function (socket) {
+  socket.on('client_register', function(data) {
+    if(Object.keys(game_status).length > player_count)
+      return;
+
+    game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
+    console.log(Object.keys(game_status).length);
+    socket.emit('client_info', {'id': socket.id});    
+  });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+  socket.on('game_input', function(data) {
+    id = data['client_id'];
+    if(!id || !game_status[id]) {
+      return;
+    }
+    var client_status = game_status[id];
+    console.log(client_status);
+    var move = data['move'];
+    if(move=='left') {
+      client_status['x'] -= 50;
+    }
+    else if(move=='right') {
+      client_status['x'] += 50;
+    }
+    else if(move=='up') {
+      client_status['y'] -= 50;
+    }
+    else if(move=='down') {
+      client_status['y'] += 50;
+    }
+    console.log(client_status);
+    console.log(game_status);
+  });
+  socket.on('game_status', function(data) {
+    socket.emit('game_status', game_status);
+  });
 });
-console.log('Server running at http://127.0.0.1:' + port + '/');
