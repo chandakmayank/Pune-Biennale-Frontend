@@ -11,6 +11,11 @@ socket.on('connect',function(){
 x.style.color = "green";                     // Change the color of the element
 });
 
+    socket.on('disconnect', function () {
+        console.log('Game disconnected!');
+        document.getElementById("socketconn").style.color = "red"
+    });
+
 // var socket = io.connect('http://localhost:8080',{autoConnect: true });
 socket.emit('client_register');
 
