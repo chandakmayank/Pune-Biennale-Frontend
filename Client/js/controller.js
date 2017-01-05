@@ -21,6 +21,8 @@ socket.emit('client_register');
 
 socket.on('client_info', function (data) {
 	client_id = data['id'];
+        x = document.getElementById("socketconn");
+        x.innerHTML = "connected as player " + data.player_id;
 });
 
 function left() {

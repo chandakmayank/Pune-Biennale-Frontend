@@ -12,32 +12,15 @@
         <canvas id="gameCanvas" style="border: none;" width="1440" height="1080" align="left"> Please upgrade your browser to support HTML5.
             <br/> One recommendation is to install the latest Chrome or Firefox. </canvas>
         <div class="controls" style="position: absolute; top:0; right:0;">
-                <button onclick="playerSpawn()">add player</button>
-    <button onclick="clearCanvas()">clear</button>
-        <button onclick="treats()">add treat</button>
             <h2>High Scorers</h2>
             <p>
-                <table class="tg">
-                    <tr>
-                        <th class="tg-yw4l">Acme</th>
-                        <th class="tg-yw4l">12000</th>
-                    </tr>
-                    <tr>
-                        <td class="tg-yw4l">Balram</td>
-                        <td class="tg-yw4l">10000</td>
-                    </tr>
-                    <tr>
-                        <td class="tg-yw4l">Catherine</td>
-                        <td class="tg-yw4l">6000</td>
-                    </tr>
+                <table id="player_scores" class="tg">
                 </table>
             </p>
             <br>
             <br>
             <h1>Earth Karma</h1>
-            <h3>28000</h3> </div>
-
-
+            <h3 id='earth_score'>0</h3> </div>
     </div>
     <script type="text/javascript" src="js/display.js"></script>
     <script type="text/javascript" src="js/constants.js"></script>

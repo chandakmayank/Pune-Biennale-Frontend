@@ -114,12 +114,30 @@ function update() {
   ctx.drawImage(mapImage, 0, 0);
   socket.emit('game_status');
   socket.on('game_status', function (data) {
+
+    elem = document.getElementById('earth_score');
+    elem.innerHTML = data['earth_score'];
+
+    score_elem = document.getElementById('player_scores');
+    score_elem.innerHTML = '';
+
     renderTreats(data['treats']);
     for (var key in data['game_status']) {
       client_status = data['game_status'][key];
       x = client_status['x'];
       y = client_status['y'];
       ctx.drawImage(charImage, x, y);
+
+      row = score_elem.insertRow();
+
+      cell = row.insertCell();
+      cell.innerHTML = "Player " + client_status.player_id;
+      
+      cell = row.insertCell();
+      cell.innerHTML = '---';
+
+      cell = row.insertCell();
+      cell.innerHTML = client_status.score;
     }
   });
 }

@@ -16,6 +16,9 @@ var last_player_id = 0;
 
 var number_of_treats = 10;
 var type_of_treats = ['car', 'ac', 'shoe', 'cloth'];
+var weights = [10, 20, 30, 40];
+
+var earth_score = 0;
 
 var treats = [];
 for(i=0; i < number_of_treats; i++) {
@@ -23,7 +26,7 @@ for(i=0; i < number_of_treats; i++) {
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
-  treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position})
+  treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position, 'weigth': weights[type_of_treat]})
 }
 console.log(treats);
 
@@ -33,7 +36,8 @@ io.on('connection', function (socket) {
       return;
 
     last_player_id += 1;
-    game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1, 'player_id': last_player_id}
+    game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1, 
+                                'player_id': last_player_id, 'score': 0}
     console.log(Object.keys(game_status).length);
     socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id});
   });
@@ -69,6 +73,8 @@ io.on('connection', function (socket) {
       console.log(x_diff, y_diff, treat.x, x);
 
       if(x_diff <= 30 && y_diff <= 30) {
+        earth_score += treat.weigth;
+        client_status['score'] += treat.weigth;
         treats.splice(treat_id, 1);
         break;
       }
@@ -78,11 +84,10 @@ io.on('connection', function (socket) {
     console.log(game_status);
   });
   socket.on('game_status', function(data) {
-    socket.emit('game_status', {'game_status': game_status, 'treats': treats});
+    socket.emit('game_status', {'game_status': game_status, 'treats': treats, 'earth_score': earth_score});
   });
   socket.on('disconnect', function(data) {
     console.log('Client disconnect!'+socket.id);
     delete game_status[socket.id]
   });
-
 });
