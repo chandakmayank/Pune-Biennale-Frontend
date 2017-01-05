@@ -12,18 +12,17 @@ app.get('/display', function (req, res) {
 
 var game_status = {};
 var player_count = 60;
+var last_player_id = 0;
 
 io.on('connection', function (socket) {
   socket.on('client_register', function(data) {
     if(Object.keys(game_status).length > player_count)
       return;
 
-    game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
+    last_player_id += 1;
+    game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1, 'player_id': last_player_id}
     console.log(Object.keys(game_status).length);
-    socket.emit('client_info', {'id': socket.id});    
-  });
-  socket.on('my other event', function (data) {
-    console.log(data);
+    socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id});
   });
   socket.on('game_input', function(data) {
     id = data['client_id'];
