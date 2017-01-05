@@ -34,16 +34,16 @@ io.on('connection', function (socket) {
     console.log(client_status);
     var move = data['move'];
     if(move=='left') {
-      client_status['x'] -= 50;
+      client_status['x'] -= 35;
     }
     else if(move=='right') {
-      client_status['x'] += 50;
+      client_status['x'] += 35;
     }
     else if(move=='up') {
-      client_status['y'] -= 50;
+      client_status['y'] -= 35;
     }
     else if(move=='down') {
-      client_status['y'] += 50;
+      client_status['y'] += 35;
     }
     console.log(client_status);
     console.log(game_status);
@@ -55,4 +55,5 @@ io.on('connection', function (socket) {
     console.log('Client disconnect!'+socket.id);
     delete game_status[socket.id]
   });
+
 });
