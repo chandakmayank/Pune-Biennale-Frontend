@@ -127,6 +127,8 @@ function update() {
       x = client_status['x'];
       y = client_status['y'];
       ctx.drawImage(charImage, x, y);
+      ctx.fillStyle = "black";
+      ctx.fillText(client_status.player_id, x+13, y+80);
 
       row = score_elem.insertRow();
 
