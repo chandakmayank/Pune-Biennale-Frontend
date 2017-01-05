@@ -40,14 +40,18 @@ shoeImage.ready = false;
 shoeImage.onload = setAssetReady;
 shoeImage.src = PATH_SHOE;
 
-//Preload Car
-var carImage = new Image();
-carImage.ready = false;
-carImage.onload = setAssetReady;
-carImage.src = PATH_CAR;
+//Preload Cloth
+var clothImage = new Image();
+clothImage.ready = false;
+clothImage.onload = setAssetReady;
+clothImage.src = PATH_CLOTH;
 
-
-
+var treat_objs = {
+  'car': carImage,
+  'ac': acImage,
+  'shoe': shoeImage,
+  'cloth': clothImage
+};
 
 function setAssetReady() {
     this.ready = true;
@@ -104,36 +108,25 @@ charY = CHAR_START_Y;
 currX = IMAGE_START_X;
 currY = IMAGE_START_EAST_Y;
 
-var treatPosition = {
-   'car':{   'x': 400,
-   'y':400}};
-
-
-   function update() {
-    ctx.fillStyle = "#F9FBF9";
-    ctx.fillRect(0, 0, stage.width, stage.height)
-    ctx.drawImage(mapImage, 0, 0);
-    socket.emit('game_status');
-    socket.on('game_status', function (data) {
-        renderTreats(treatPosition );
-
-        for (var key in data) {
-            client_status = data[key];
-            x = client_status['x'];
-            y = client_status['y'];
-            ctx.drawImage(charImage, x, y);
-
-        }
-    });
+function update() {
+  ctx.fillStyle = "#F9FBF9";
+  ctx.fillRect(0, 0, stage.width, stage.height)
+  ctx.drawImage(mapImage, 0, 0);
+  socket.emit('game_status');
+  socket.on('game_status', function (data) {
+    renderTreats(data['treats']);
+    for (var key in data['game_status']) {
+      client_status = data['game_status'][key];
+      x = client_status['x'];
+      y = client_status['y'];
+      ctx.drawImage(charImage, x, y);
+    }
+  });
 }
 
 
 function renderTreats(x){
-    var carPosition = x.car;
-    console.log(carPosition);
-    ctx.drawImage(carImage, carPosition.x-100,carPosition.y-100);
-    // ctx.drawImage(shoeImage, x+100,y+100);
-    // ctx.drawImage(acImage, x+200,y-100);
-    // ctx.drawImage(shoeImage, x+20,y-100);
-    ctx.drawImage(carImage, carPosition.x+320,carPosition-140);
+    x.forEach(function(treat) {
+      ctx.drawImage(treat_objs[treat.type], treat.position.x, treat.position.y);
+    });
 };

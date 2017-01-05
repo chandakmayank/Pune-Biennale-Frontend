@@ -11,8 +11,21 @@ app.get('/display', function (req, res) {
 });
 
 var game_status = {};
-var player_count = 60;
+var player_count = 30;
 var last_player_id = 0;
+
+var number_of_treats = 10;
+var type_of_treats = ['car', 'ac', 'shoe', 'cloth'];
+
+var treats = [];
+for(i=0; i < number_of_treats; i++) {
+  type_of_treat = Math.floor(Math.random() * type_of_treats.length);
+  treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
+  treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
+  treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
+  treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position})
+}
+console.log(treats);
 
 io.on('connection', function (socket) {
   socket.on('client_register', function(data) {
@@ -44,11 +57,28 @@ io.on('connection', function (socket) {
     else if(move=='down') {
       client_status['y'] += 35;
     }
+
+    x = client_status.x;
+    y = client_status.y;
+
+    for(treat_id in treats) {
+      treat = treats[treat_id];
+      x_diff = Math.abs(treat.position.x - x);
+      y_diff = Math.abs(treat.position.y - y);
+
+      console.log(x_diff, y_diff, treat.x, x);
+
+      if(x_diff <= 30 && y_diff <= 30) {
+        treats.splice(treat_id, 1);
+        break;
+      }
+    }
+
     console.log(client_status);
     console.log(game_status);
   });
   socket.on('game_status', function(data) {
-    socket.emit('game_status', game_status);
+    socket.emit('game_status', {'game_status': game_status, 'treats': treats});
   });
   socket.on('disconnect', function(data) {
     console.log('Client disconnect!'+socket.id);
