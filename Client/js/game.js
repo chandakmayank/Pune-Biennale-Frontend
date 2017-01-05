@@ -105,17 +105,17 @@ currX = IMAGE_START_X;
 currY = IMAGE_START_EAST_Y;
 
 var treatPosition = {
-    'x': 400,
-    'y':400};
+   'car':{   'x': 400,
+   'y':400}};
 
 
-function update() {
+   function update() {
     ctx.fillStyle = "#F9FBF9";
     ctx.fillRect(0, 0, stage.width, stage.height)
     ctx.drawImage(mapImage, 0, 0);
     socket.emit('game_status');
     socket.on('game_status', function (data) {
-        renderTreats(treatPosition.x,treatPosition.y );
+        renderTreats(treatPosition );
 
         for (var key in data) {
             client_status = data[key];
@@ -128,12 +128,12 @@ function update() {
 }
 
 
-
-console.log()
-function renderTreats(x,y){
-    ctx.drawImage(carImage, x-100,y-100);
-    ctx.drawImage(shoeImage, x+100,y+100);
-    ctx.drawImage(acImage, x+200,y-100);
-    ctx.drawImage(shoeImage, x+20,y-100);
-    ctx.drawImage(carImage, x+320,y-140);
-}
+function renderTreats(x){
+    var carPosition = x.car;
+    console.log(carPosition);
+    ctx.drawImage(carImage, carPosition.x-100,carPosition.y-100);
+    // ctx.drawImage(shoeImage, x+100,y+100);
+    // ctx.drawImage(acImage, x+200,y-100);
+    // ctx.drawImage(shoeImage, x+20,y-100);
+    ctx.drawImage(carImage, carPosition.x+320,carPosition-140);
+};
