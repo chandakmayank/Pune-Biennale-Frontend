@@ -2,28 +2,41 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script src="socket.io/socket.io.js"></script>
-    <title>Game Set Up</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script src="socket.io/socket.io.js"></script>
+  <title>Game Set Up</title>
 </head>
 
 <body>
-    <button onclick="up();" id="up">Up</button>
-    <button onclick="down();" id="down">Down</button>
-    <button onclick="left();" id="left">Left</button>
-    <button onclick="right();" id="right">Right</button>
-    <h1 id="socketconn" style="color:red;">connected</h1>
-    <div id="status">Here lies the status meter</div>
-    <div id="karma">Here is the karma meter</div>
-    <button id="optbutton" disabled>Optional button</button>
-</body>
-      <script src="js/controller.js"></script>
 
-  <script>
-  var socket = io();
-  socket.connect('http://localhost:8080/', {
-    autoConnect: true
-  });
-</script>
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">Movement Controls</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">  <button onclick="up();" id="up">Up</button>
+</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">  <button onclick="down();" id="down">Down</button>
+</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">  <button onclick="left();" id="left">Left</button>
+</td>
+  </tr>
+    <tr>
+    <td class="tg-yw4l">  <button onclick="right();" id="right">Right</button>
+</td>
+  </tr>
+</table>
+  <h3 id="socketconn" style="color:red;">connected</h3>
+  <div id="status">Here lies the status meter</div>
+  <div id="karma">Here is the karma meter</div>
+  <button id="optbutton" disabled>Optional button</button>
+</body>
+
+<script src="js/controller.js"></script>
+
 
 </html>

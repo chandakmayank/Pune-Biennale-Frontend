@@ -51,4 +51,8 @@ io.on('connection', function (socket) {
   socket.on('game_status', function(data) {
     socket.emit('game_status', game_status);
   });
+  socket.on('disconnect', function(data) {
+    console.log('Client disconnect!'+socket.id);
+    delete game_status[socket.id]
+  });
 });

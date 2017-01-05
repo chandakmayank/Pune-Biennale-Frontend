@@ -3,7 +3,7 @@
 //------------
 var STAGE_WIDTH = 1440,
 	STAGE_HEIGHT = 1080,
-	TIME_PER_FRAME = 300, //this equates to 30 fps
+	TIME_PER_FRAME = 500, //this equates to 30 fps
 	GAME_FONTS = "bold 24px sans-serif";
 
 var PATH_CHAR = "img/character.png";

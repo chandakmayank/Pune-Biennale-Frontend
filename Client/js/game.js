@@ -22,6 +22,33 @@ charImage.ready = false;
 charImage.onload = setAssetReady;
 charImage.src = PATH_CHAR;
 
+//Preload Car
+var carImage = new Image();
+carImage.ready = false;
+carImage.onload = setAssetReady;
+carImage.src = PATH_CAR;
+
+//Preload AC
+var acImage = new Image();
+acImage.ready = false;
+acImage.onload = setAssetReady;
+acImage.src = PATH_AC;
+
+//Preload Shoe
+var shoeImage = new Image();
+shoeImage.ready = false;
+shoeImage.onload = setAssetReady;
+shoeImage.src = PATH_SHOE;
+
+//Preload Car
+var carImage = new Image();
+carImage.ready = false;
+carImage.onload = setAssetReady;
+carImage.src = PATH_CAR;
+
+
+
+
 function setAssetReady() {
     this.ready = true;
 }
@@ -53,9 +80,10 @@ function preloading() {
     if (charImage.ready) {
         clearInterval(preloader);
         //Initialise game
-        facing = "E"; //N = North, E = East, S = South, W = West
-        isMoving = false;
+        // facing = "E"; //N = North, E = East, S = South, W = West
+        // isMoving = false;
         gameloop = setInterval(update, TIME_PER_FRAME);
+        // setInterval(renderTreats, TIME_PER_FRAME);
         socket.emit("init_client", {
             'client_id': 'test'
         })
@@ -82,11 +110,22 @@ function update() {
     ctx.drawImage(mapImage, 0, 0);
     socket.emit('game_status');
     socket.on('game_status', function (data) {
+        renderTreats(500,500);
+
         for (var key in data) {
             client_status = data[key];
             x = client_status['x'];
             y = client_status['y'];
             ctx.drawImage(charImage, x, y);
+
         }
     });
+}
+
+function renderTreats(x,y){
+    ctx.drawImage(carImage, x-100,y-100);
+    ctx.drawImage(shoeImage, x+100,y+100);
+    ctx.drawImage(acImage, x+200,y-100);
+    ctx.drawImage(shoeImage, x+20,y-100);
+    ctx.drawImage(carImage, x+320,y-140);
 }
