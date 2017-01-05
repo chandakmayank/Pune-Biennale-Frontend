@@ -14,9 +14,9 @@ var game_status = {};
 var player_count = 30;
 var last_player_id = 0;
 
-var number_of_treats = 10;
-var type_of_treats = ['car', 'ac', 'shoe', 'cloth'];
-var weights = [10, 20, 30, 40];
+var number_of_treats = 25;
+var type_of_treats = ['car', 'ac', 'shoe', 'cloth', 'home', 'phone'];
+var weights = [150, 15, 15, 15, 250, 70];
 
 var earth_score = 0;
 

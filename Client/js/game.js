@@ -46,11 +46,25 @@ clothImage.ready = false;
 clothImage.onload = setAssetReady;
 clothImage.src = PATH_CLOTH;
 
+//Preload Home
+var homeImage = new Image();
+homeImage.ready = false;
+homeImage.onload = setAssetReady;
+homeImage.src = PATH_HOME;
+
+//Preload Phone
+var phoneImage = new Image();
+phoneImage.ready = false;
+phoneImage.onload = setAssetReady;
+phoneImage.src = PATH_PHONE;
+
 var treat_objs = {
   'car': carImage,
   'ac': acImage,
   'shoe': shoeImage,
-  'cloth': clothImage
+  'cloth': clothImage,
+  'home': homeImage,
+  'phone': phoneImage
 };
 
 function setAssetReady() {
