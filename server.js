@@ -23,15 +23,22 @@ var earth_score = 0;
 var treats = [];
 function treatsUpdate(){
   for(i=0; i < number_of_treats; i++) {
-  type_of_treat = Math.floor(Math.random() * type_of_treats.length);
-  treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
-  treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
-  treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
-  treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position, 'weigth': weights[type_of_treat]})
-  }};
+    type_of_treat = Math.floor(Math.random() * type_of_treats.length);
+    treat_position = {'x': Math.floor(Math.random() * 1200) + 1, 'y': Math.floor(Math.random() * 900) + 1}
+    treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position, 'weigth': weights[type_of_treat]})
+  }
+};
 
-setInterval(treatsUpdate, 30000);
-console.log(treats);
+function treatCountCheck(){
+  if (treats.length>100)
+    console.log("Treats on map" + treats.length)
+  else
+    treatsUpdate();
+};
+
+
+setInterval(treatCountCheck, 10000);
+
 
 io.on('connection', function (socket) {
   socket.on('client_register', function(data) {
@@ -40,7 +47,7 @@ io.on('connection', function (socket) {
 
     last_player_id += 1;
     game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1, 
-                                'player_id': last_player_id, 'score': 0}
+    'player_id': last_player_id, 'score': 0}
     console.log(Object.keys(game_status).length);
     socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
   });
