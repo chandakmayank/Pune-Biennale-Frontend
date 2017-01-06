@@ -20,7 +20,6 @@ socket.emit('client_register');
 
 socket.on('client_info', function (data) {
 	client_id = data['id'];
-	console.log(data.player_status.score)
 	x = document.getElementById("socketconn");
 	x.innerHTML = "Connected as PLAYER " + data.player_id; 
 	y = document.getElementById("score");
