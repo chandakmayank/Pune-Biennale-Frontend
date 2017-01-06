@@ -2,38 +2,55 @@
 <html>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script src="socket.io/socket.io.js"></script>
-  <title>Game Set Up</title>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+ <title>Karma Crisis</title>
+
+ <!-- Bootstrap -->
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+
+ <script src="socket.io/socket.io.js"></script>
 </head>
 
 <body>
 
-<table class="tg">
-  <tr>
-    <th class="tg-yw4l">Movement Controls</th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">  <button onclick="up();" id="up">Up</button>
-</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">  <button onclick="down();" id="down">Down</button>
-</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">  <button onclick="left();" id="left">Left</button>
-</td>
-  </tr>
-    <tr>
-    <td class="tg-yw4l">  <button onclick="right();" id="right">Right</button>
-</td>
-  </tr>
-</table>
-  <h3 id="socketconn" style="color:red;">connected</h3>
-</body>
+  <div class="container-fluid">  
+  <h3>Welcome to Karma Crisis</h3>
+      <table class="table">
 
-<script src="js/controller.js"></script>
+        <tr>
+          <th class="h5">Movement Controls</th>
+        </tr>
+        <tr>
+          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="up();" id="up">Up</button>
+          </td>
+        </tr>
+        <tr>
+          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="down();" id="down">Down</button>
+          </td>
+        </tr>
+        <tr>
+          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="left();" id="left">Left</button>
+          </td>
+        </tr>
+        <tr>
+          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="right();" id="right">Right</button>
+          </td>
+        </tr>
+                <tr>
+          <td >  <button type="button" class="btn btn-success btn-block" disabled>Fix Karma</button>
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <h5 id="socketconn" class="display-4" style="color:red;">connected</h5>
+    </div>
+  </body>
+
+  <!-- <script src="js/bootstrap.min.js"></script> -->
+  <script src="js/controller.js"></script>
 
 
-</html>
+  </html>
