@@ -11,23 +11,27 @@ socket.on('connect',function(){
 x.style.color = "green";                     // Change the color of the element
 });
 
-    socket.on('disconnect', function () {
-        console.log('Game disconnected!');
-        document.getElementById("socketconn").style.color = "red"
-    });
+socket.on('disconnect', function () {
+	console.log('Game disconnected!');
+	document.getElementById("socketconn").style.color = "red"
+});
 
-// var socket = io.connect('http://localhost:8080',{autoConnect: true });
 socket.emit('client_register');
 
 socket.on('client_info', function (data) {
 	client_id = data['id'];
-        x = document.getElementById("socketconn");
-        x.innerHTML = "connected as player " + data.player_id;
+	console.log(data.player_status.score)
+	x = document.getElementById("socketconn");
+	x.innerHTML = "Connected as PLAYER " + data.player_id; 
+	y = document.getElementById("score");
+	y.innerHTML = data.player_status.score; 
 });
+
 
 function left() {
 	console.log('left')
 	socket.emit('game_input', {'move': 'left', 'client_id': client_id});
+
 };
 
 function right() {

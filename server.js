@@ -14,7 +14,7 @@ var game_status = {};
 var player_count = 30;
 var last_player_id = 0;
 
-var number_of_treats = 15;
+var number_of_treats = 10;
 var type_of_treats = ['car', 'ac', 'shoe', 'cloth', 'home', 'phone'];
 var weights = [150, 15, 15, 15, 250, 70];
 
@@ -42,7 +42,7 @@ io.on('connection', function (socket) {
     game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1, 
                                 'player_id': last_player_id, 'score': 0}
     console.log(Object.keys(game_status).length);
-    socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id});
+    socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
   });
   socket.on('game_input', function(data) {
     id = data['client_id'];
@@ -82,6 +82,7 @@ io.on('connection', function (socket) {
         break;
       }
     }
+    socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
 
     console.log(client_status);
     console.log(game_status);
