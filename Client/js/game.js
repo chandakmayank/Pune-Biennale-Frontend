@@ -22,6 +22,11 @@ charImage.ready = false;
 charImage.onload = setAssetReady;
 charImage.src = PATH_CHAR;
 
+var charImageGirl = new Image();
+charImageGirl.ready = false;
+charImageGirl.onload = setAssetReady;
+charImageGirl.src = PATH_CHAR_GIRL;
+
 //Preload Car
 var carImage = new Image();
 carImage.ready = false;
@@ -108,12 +113,6 @@ function preloading() {
     }
 }
 
-function keyUpHandler(event) {
-    var keyPressed = String.fromCharCode(event.keyCode);
-    if ((keyPressed == "W") || (keyPressed == "A") || (keyPressed == "S") || (keyPressed == "D")) {
-        isMoving = false;
-    }
-}
 //------------
 //Game Loop
 //------------
@@ -140,9 +139,14 @@ function update() {
       client_status = data['game_status'][key];
       x = client_status['x'];
       y = client_status['y'];
-      ctx.drawImage(charImage, x, y);
+      var charSelector = isOdd(client_status.player_id);
+    
+      if(charSelector==0)
+        ctx.drawImage(charImage, x, y);
+      else
+        ctx.drawImage(charImageGirl,x,y)
       ctx.fillStyle = "black";
-      ctx.fillText(client_status.player_id, x+13, y+80);
+      ctx.fillText(client_status.player_id, x+28, y+70);
 
       row = score_elem.insertRow();
 
@@ -157,6 +161,8 @@ function update() {
     }
   });
 }
+
+function isOdd(num) { return num % 2;}
 
 
 function renderTreats(x){
