@@ -17,40 +17,56 @@
 <body>
 
   <div class="container-fluid">  
-  <h3>Welcome to Karma Crisis</h3>
-      <table class="table">
+    <h3>Welcome to Karma Crisis</h3>
 
-        <tr>
-          <th class="h5">Movement Controls</th>
-        </tr>
-        <tr>
-          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="up();" id="up">Up</button>
-          </td>
-        </tr>
-        <tr>
-          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="down();" id="down">Down</button>
-          </td>
-        </tr>
-        <tr>
-          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="left();" id="left">Left</button>
-          </td>
-        </tr>
-        <tr>
-          <td >  <button type="button" class="btn btn-primary btn-lg btn-block" onclick="right();" id="right">Right</button>
-          </td>
-        </tr>
-                <tr>
-          <td >  <button type="button" class="btn btn-success btn-block" disabled>Fix Karma</button>
-          </td>
-        </tr>
-      </table>
-      <hr>
-      <h5 id="socketconn" class="display-4" style="color:red;">connected</h5>
-    </div>
-  </body>
+    <h5>Movement Controls</h5>
 
-  <!-- <script src="js/bootstrap.min.js"></script> -->
-  <script src="js/controller.js"></script>
+    <table class="table">
 
 
-  </html>
+      <tr>
+        <td > 
+        </td>
+        <td >  <button type="button" class="btn btn-primary btn-lg " onclick="up();" id="up"> <span class="glyphicon  glyphicon-arrow-up"></span></button>
+        </td>
+        <td > 
+        </td>
+      </tr>
+      <tr>
+        <td >  
+          <button type="button" class="btn btn-primary btn-lg " onclick="left();" id="left"><span class="glyphicon  glyphicon-arrow-left"></span></button>
+        </td>
+        <td > 
+        </td>
+        <td > 
+          <button type="button" class="btn btn-primary btn-lg" onclick="right();" id="right"><span class="glyphicon  glyphicon-arrow-right"></span></button>
+        </td>
+
+      </tr>
+      <tr>
+       <td > 
+       </td>
+       <td >  
+         <button type="button" class="btn btn-primary btn-lg" onclick="down();" id="down"><span class="glyphicon  glyphicon-arrow-down"></span></button>
+       </td>
+       <td > 
+       </td>
+     </tr>
+
+
+  
+
+  </table>
+  <hr>
+  <button type="button" class="btn btn-success btn-block" disabled>Fix Karma</button>
+     
+  <hr>
+  <h5 id="socketconn" class="display-4" style="color:red;">connected</h5>
+</div>
+</body>
+
+<!-- <script src="js/bootstrap.min.js"></script> -->
+<script src="js/controller.js"></script>
+
+
+</html>
