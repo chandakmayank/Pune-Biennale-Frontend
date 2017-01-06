@@ -14,7 +14,7 @@ var game_status = {};
 var player_count = 30;
 var last_player_id = 0;
 
-var number_of_treats = 25;
+var number_of_treats = 15;
 var type_of_treats = ['car', 'ac', 'shoe', 'cloth', 'home', 'phone'];
 var weights = [150, 15, 15, 15, 250, 70];
 
@@ -29,7 +29,7 @@ function treatsUpdate(){
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
   treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position, 'weigth': weights[type_of_treat]})
   }};
-treatsUpdate();
+
 setInterval(treatsUpdate, 30000);
 console.log(treats);
 
