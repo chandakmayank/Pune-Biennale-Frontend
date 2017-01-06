@@ -21,13 +21,16 @@ var weights = [150, 15, 15, 15, 250, 70];
 var earth_score = 0;
 
 var treats = [];
-for(i=0; i < number_of_treats; i++) {
+function treatsUpdate(){
+  for(i=0; i < number_of_treats; i++) {
   type_of_treat = Math.floor(Math.random() * type_of_treats.length);
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
   treat_position = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1}
   treats.push({'type': type_of_treats[type_of_treat], 'position': treat_position, 'weigth': weights[type_of_treat]})
-}
+  }};
+treatsUpdate();
+setInterval(treatsUpdate, 30000);
 console.log(treats);
 
 io.on('connection', function (socket) {
@@ -72,7 +75,7 @@ io.on('connection', function (socket) {
 
       console.log(x_diff, y_diff, treat.x, x);
 
-      if(x_diff <= 30 && y_diff <= 30) {
+      if(x_diff <= 40 && y_diff <= 40) {
         earth_score += treat.weigth;
         client_status['score'] += treat.weigth;
         treats.splice(treat_id, 1);

@@ -135,6 +135,7 @@ function update() {
     score_elem.innerHTML = '';
 
     renderTreats(data['treats']);
+    
     for (var key in data['game_status']) {
       client_status = data['game_status'][key];
       x = client_status['x'];
