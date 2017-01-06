@@ -22,6 +22,10 @@ socket.on('client_info', function (data) {
 	client_id = data['id'];
 	x = document.getElementById("socketconn");
 	x.innerHTML = "Connected as PLAYER " + data.player_id; 
+});
+
+socket.on('score_update', function (data) {
+	client_id = data['id'];
 	y = document.getElementById("score");
 	y.innerHTML = data.player_status.score; 
 });

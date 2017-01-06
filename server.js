@@ -89,7 +89,7 @@ io.on('connection', function (socket) {
         break;
       }
     }
-    socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
+    socket.emit('score_update', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
 
     console.log(client_status);
     console.log(game_status);
