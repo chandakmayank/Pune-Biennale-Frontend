@@ -77,7 +77,7 @@ io.on('connection', function (socket) {
     y = client_status.y;
 
     if(client_status.score >1000){
-      client_status.karma -= 5
+      client_status.karma -= 1;
       // console.log(client_status.karma);
     };
 
