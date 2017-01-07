@@ -2,14 +2,14 @@
 //System Values
 //------------
 var STAGE_WIDTH = 1440,
-	STAGE_HEIGHT = 1080,
+	STAGE_HEIGHT = 900,
 	TIME_PER_FRAME = 1000, 
 	GAME_FONTS = "bold 24px sans-serif";
 
 var PATH_CHAR = "img/character.png";
 var PATH_CHAR_GIRL = "img/character2.png";
 
-var PATH_MAP = "img/pune map.png";
+var PATH_MAP = "img/pune mapb.png";
 var PATH_CAR = "img/car.png";
 var PATH_AC = "img/ac.png";
 var PATH_HOME = "img/home.png";

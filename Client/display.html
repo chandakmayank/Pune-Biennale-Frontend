@@ -4,27 +4,33 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="socket.io/socket.io.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <title>Game Set Up</title>
 </head>
 
 <body>
-    <div class="wrapper" style="margin: 0 auto; width: 1850px; position: relative;">
-        <canvas id="gameCanvas" style="border: none;" width="1440" height="1080" align="left"> Please upgrade your browser to support HTML5.
+    <div class="wrapper" style="margin: 0 auto; width: 100%; position: relative;">
+    <canvas id="gameCanvas" style="border: none;" align="left"> Please upgrade your browser to support HTML5.
             <br/> One recommendation is to install the latest Chrome or Firefox. </canvas>
-        <div class="controls" style="position: absolute; top:0; right:0;">
-            <h2>High Scorers</h2>
-            <p>
-                <table id="player_scores" class="tg">
-                </table>
-            </p>
-            <br>
-            <br>
-            <h1>Earth Karma</h1>
-            <h3 id='earth_score'>0</h3> </div>
-    </div>
-    <script type="text/javascript" src="js/display.js"></script>
-    <script type="text/javascript" src="js/constants.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
-</body>
+            <div class="controls" style="">
+                <div class="col-md-4">
+                    <h2>High Scorers</h2>
+                    <p>
+                        <table id="player_scores" class="table">
+                        </table>
+                    </p>
+                </div>
 
-</html>
+                <div class="col-md-4">
+                    <h1>Earth Karma</h1>
+                    <h3 id='earth_score'>0</h3>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/display.js"></script>
+        <script type="text/javascript" src="js/constants.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+    </body>
+
+    </html>

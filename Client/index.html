@@ -10,12 +10,12 @@
 
  <!-- Bootstrap -->
  <link href="css/bootstrap.min.css" rel="stylesheet">
-<style type="text/css">
+ <style type="text/css">
   .table td {
    text-align: center;   
-}
+ }
 </style>
- <script src="socket.io/socket.io.js"></script>
+<script src="socket.io/socket.io.js"></script>
 </head>
 
 <body>
@@ -58,17 +58,19 @@
      </tr>
 
 
-  
 
-  </table>
-  <hr>
-  <button type="button" class="btn btn-success btn-block" disabled>Fix Karma</button>
-     
-  <hr>
-  <h5 id="socketconn" class="display-4"></h5>
-  <h4>Your Current Score- <span id="score" class="h3"><strong>0</strong></span></h4>
 
-</div>
+   </table>
+   <hr>
+   <button type="button" id="fixkarma" onclick="fixKarma();" class="btn btn-success btn-block" disabled>Fix Karma</button>
+
+   <hr>
+   <h5 id="socketconn" class="display-4"></h5>
+   <h4>Your Status- <span id="score" class="h3"><strong>0</strong></span></h4>
+   <h4>Your Karma- <span id="karma" class="h3"><strong>0</strong></span></h4>
+
+
+ </div>
 </body>
 
 <!-- <script src="js/bootstrap.min.js"></script> -->

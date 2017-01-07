@@ -124,7 +124,8 @@ currY = IMAGE_START_EAST_Y;
 function update() {
   ctx.fillStyle = "#F9FBF9";
   ctx.fillRect(0, 0, stage.width, stage.height)
-  ctx.drawImage(mapImage, 0, 0);
+  ctx.drawImage(mapImage, 0, 0, 1271,843,
+    0, 0,  stage.width, stage.height);
   socket.emit('game_status');
   socket.on('game_status', function (data) {
 

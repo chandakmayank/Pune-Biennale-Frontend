@@ -28,6 +28,8 @@ socket.on('score_update', function (data) {
 	client_id = data['id'];
 	y = document.getElementById("score");
 	y.innerHTML = data.player_status.score; 
+	z = document.getElementById("karma");
+	z.innerHTML = data.player_status.karma; 
 });
 
 
