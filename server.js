@@ -131,7 +131,7 @@ io.on('connection', function (socket) {
     }
     socket.emit('score_update', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
 
-    socket.emit('karma_update', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id].karma});
+    // socket.emit('karma_update', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id].karma});
 
     // console.log(client_status);
     // console.log(game_status);
