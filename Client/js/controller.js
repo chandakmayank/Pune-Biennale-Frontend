@@ -14,6 +14,11 @@ x.style.color = "green";                     // Change the color of the element
 socket.on('disconnect', function () {
 	console.log('Game disconnected!');
 	document.getElementById("socketconn").style.color = "red"
+
+	var d = document.getElementById("socketconn");
+	d.className = "lead bg-danger";
+	document.getElementById("socketconn").innerHTML = "You got too Greedy. Bye Bye"
+
 });
 
 socket.emit('client_register');
@@ -30,6 +35,9 @@ socket.on('score_update', function (data) {
 	y.innerHTML = data.player_status.score; 
 	z = document.getElementById("karma");
 	z.innerHTML = data.player_status.karma; 
+	if (data.player_status.karma <1){
+		socket.disconnect();
+	}
 });
 
 
