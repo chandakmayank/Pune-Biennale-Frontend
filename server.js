@@ -18,9 +18,26 @@ var number_of_treats = 10;
 var type_of_treats = ['car', 'ac', 'shoe', 'cloth', 'home', 'phone'];
 var weights = [150, 15, 15, 15, 250, 70];
 
-var earth_score = 6000;
+earth_score = 1;
 
 
+function ObjectLength( object ) {
+  var length = 0;
+  for( var key in object ) {
+    if( object.hasOwnProperty(key) ) {
+      ++length;
+    }
+  }
+  return length;
+};
+
+function earthKarma(data){
+  earth_score = 1;
+  for (key in data){
+    earth_score += data[key].karma;
+  }
+  
+}
 var treats = [];
 function treatsUpdate(){
   for(i=0; i < number_of_treats; i++) {
@@ -49,7 +66,7 @@ io.on('connection', function (socket) {
     last_player_id += 1;
     game_status[socket.id] = {'x': Math.floor(Math.random() * 1400) + 1, 'y': Math.floor(Math.random() * 800) + 1, 
     'player_id': last_player_id, 'score': 0, 'karma': 200}
-    console.log(Object.keys(game_status).length);
+    // console.log(Object.keys(game_status).length);
     socket.emit('client_info', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id]});
   });
   socket.on('game_input', function(data) {
@@ -58,7 +75,7 @@ io.on('connection', function (socket) {
       return;
     }
     var client_status = game_status[id];
-    console.log(client_status);
+    // console.log(client_status);
     var move = data['move'];
     if(move=='left') {
       client_status['x'] -= 35;
@@ -75,11 +92,15 @@ io.on('connection', function (socket) {
 
     x = client_status.x;
     y = client_status.y;
+    earthKarma(game_status);
 
     if(client_status.score >1000){
-      client_status.karma -= 1;
+      client_status.karma -= 2;
       // console.log(client_status.karma);
     };
+    // if(logic for eartj){
+    //   earth_score += treat.weigth;
+    // };
 
     for(treat_id in treats) {
       treat = treats[treat_id];
@@ -89,10 +110,11 @@ io.on('connection', function (socket) {
       // console.log(x_diff, y_diff, treat.x, x);
 
       if(x_diff <= 40 && y_diff <= 40) {
-        earth_score += treat.weigth;
+
         client_status['score'] += treat.weigth;
         treats.splice(treat_id, 1);
         break;
+
       }
 
     }
