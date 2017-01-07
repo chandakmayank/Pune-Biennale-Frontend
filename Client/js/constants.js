@@ -3,7 +3,7 @@
 //------------
 var STAGE_WIDTH = 1440,
 	STAGE_HEIGHT = 900,
-	TIME_PER_FRAME = 1000, 
+	TIME_PER_FRAME = 33, 
 	GAME_FONTS = "bold 24px sans-serif";
 
 var PATH_CHAR = "img/character.png";

@@ -10,6 +10,12 @@ ctx.font = GAME_FONTS;
 //---------------
 //Preloading ...
 //---------------
+
+
+function setAssetReady() {
+  this.ready = true;
+}
+
 //Preload Map
 var mapImage = new Image();
 mapImage.ready = false;
@@ -30,37 +36,37 @@ charImageGirl.src = PATH_CHAR_GIRL;
 //Preload Car
 var carImage = new Image();
 carImage.ready = false;
-carImage.onload = setAssetReady;
+carImage.onload = setAssetReady();
 carImage.src = PATH_CAR;
 
 //Preload AC
 var acImage = new Image();
 acImage.ready = false;
-acImage.onload = setAssetReady;
+acImage.onload = setAssetReady();
 acImage.src = PATH_AC;
 
 //Preload Shoe
 var shoeImage = new Image();
 shoeImage.ready = false;
-shoeImage.onload = setAssetReady;
+shoeImage.onload = setAssetReady();
 shoeImage.src = PATH_SHOE;
 
 //Preload Cloth
 var clothImage = new Image();
 clothImage.ready = false;
-clothImage.onload = setAssetReady;
+clothImage.onload = setAssetReady();
 clothImage.src = PATH_CLOTH;
 
 //Preload Home
 var homeImage = new Image();
 homeImage.ready = false;
-homeImage.onload = setAssetReady;
+homeImage.onload = setAssetReady();
 homeImage.src = PATH_HOME;
 
 //Preload Phone
 var phoneImage = new Image();
 phoneImage.ready = false;
-phoneImage.onload = setAssetReady;
+phoneImage.onload = setAssetReady();
 phoneImage.src = PATH_PHONE;
 
 var treat_objs = {
@@ -72,9 +78,7 @@ var treat_objs = {
   'phone': phoneImage
 };
 
-function setAssetReady() {
-    this.ready = true;
-}
+
 //Display Preloading
 ctx.fillRect(0, 0, stage.width, stage.height);
 ctx.fillStyle = "#000";
@@ -83,35 +87,35 @@ var preloader = setInterval(preloading, TIME_PER_FRAME);
 var gameloop, facing, currX, currY, charX, charY, isMoving;
 var socket = io();
 socket.connect('http://localhost:8080/', {
-    autoConnect: true
+  autoConnect: true
 });
 var client_id;
 var socket = io.connect('http://localhost:8080');
 socket.on('client_info', function (data) {
-    console.log(data);
+    // console.log(data);
     client_id = data['id'];
-    console.log("client_id " + client_id);
+    // console.log("client_id " + client_id);
     socket.emit('my other event', {
-        my: 'data2'
+      my: 'data2'
     });
-});
+  });
 socket.on('change_display', function (data) {
-    console.log(data);
-});
+    // console.log(data);
+  });
 
 function preloading() {
-    if (charImage.ready) {
-        clearInterval(preloader);
+  if (charImage.ready) {
+    clearInterval(preloader);
         //Initialise game
         // facing = "E"; //N = North, E = East, S = South, W = West
         // isMoving = false;
         gameloop = setInterval(update, TIME_PER_FRAME);
         // setInterval(renderTreats, TIME_PER_FRAME);
         socket.emit("init_client", {
-            'client_id': 'test'
+          'client_id': 'test'
         })
+      }
     }
-}
 
 //------------
 //Game Loop
@@ -121,13 +125,20 @@ charY = CHAR_START_Y;
 currX = IMAGE_START_X;
 currY = IMAGE_START_EAST_Y;
 
+
+data = {};
+ socket.on('game_status', function (game_status) {
+  data = game_status;
+ });
+ 
 function update() {
   ctx.fillStyle = "#F9FBF9";
   ctx.fillRect(0, 0, stage.width, stage.height)
   ctx.drawImage(mapImage, 0, 0, 1271,843,
     0, 0,  stage.width, stage.height);
-  socket.emit('game_status');
-  socket.on('game_status', function (data) {
+    socket.emit('game_status');
+
+  // socket.on('game_status', function (data) {
 
     elem = document.getElementById('earth_score');
     elem.innerHTML = data['earth_score'];
@@ -135,6 +146,7 @@ function update() {
     score_elem = document.getElementById('player_scores');
     score_elem.innerHTML = '';
 
+    console.log(data)
     renderTreats(data['treats']);
     
     for (var key in data['game_status']) {
@@ -142,7 +154,7 @@ function update() {
       x = client_status['x'];
       y = client_status['y'];
       var charSelector = isOdd(client_status.player_id);
-    
+
       if(charSelector==0)
         ctx.drawImage(charImage, x, y);
       else
@@ -161,14 +173,14 @@ function update() {
       cell = row.insertCell();
       cell.innerHTML = client_status.score;
     }
-  });
+  // });
 }
 
 function isOdd(num) { return num % 2;}
 
 
 function renderTreats(x){
-    x.forEach(function(treat) {
-      ctx.drawImage(treat_objs[treat.type], treat.position.x, treat.position.y);
-    });
+  x.forEach(function(treat) {
+    ctx.drawImage(treat_objs[treat.type], treat.position.x, treat.position.y);
+  });
 };

@@ -78,7 +78,7 @@ io.on('connection', function (socket) {
 
     if(client_status.score >1000){
       client_status.karma -= 5
-      console.log(client_status.karma);
+      // console.log(client_status.karma);
     };
 
     for(treat_id in treats) {
@@ -111,8 +111,8 @@ io.on('connection', function (socket) {
 
     socket.emit('karma_update', {'id': socket.id, 'player_id': last_player_id, 'player_status': game_status[socket.id].karma});
 
-    console.log(client_status);
-    console.log(game_status);
+    // console.log(client_status);
+    // console.log(game_status);
   });
   socket.on('game_status', function(data) {
     socket.emit('game_status', {'game_status': game_status, 'treats': treats, 'earth_score': earth_score});
